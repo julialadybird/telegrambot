@@ -2,6 +2,8 @@ from data.subloader import get_json
 from googletrans import Translator
 import datetime
 
+#Допоміжні функції
+
 
 async def get_weather_text(data):
     icons = await get_json("icons.json")
