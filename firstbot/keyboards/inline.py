@@ -1,11 +1,9 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
-links_kb = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [
-            InlineKeyboardButton(text="YouTube", url="https://youtube.com"),
-            InlineKeyboardButton(text="Telegram", url="tg://resolve?domain=@doucommunity"),
-        ]
-    ]
-)
+
+# save_book = InlineKeyboardMarkup(
+#     inline_keyboard=[
+#     [InlineKeyboardButton(text="Зберегти", callback_data="save_book")]
+# ])
+

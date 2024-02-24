@@ -1,36 +1,58 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, KeyboardButtonPollType, ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
                    
 
 main_kb = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="Images"),
-            KeyboardButton(text="Links")
+            KeyboardButton(text="Погода")
         ],
         [
-            KeyboardButton(text="Calc"),
-            KeyboardButton(text="Special")
+            KeyboardButton(text="Книги")
         ]
     ],
     resize_keyboard=True, #дозволяє зробити кнопки менші, адаптувати до клавіатури 
     one_time_keyboard=True, #буде приховуватися до наступного викор
-    input_field_placeholder="Choose an action from menu",
+    input_field_placeholder="Оберіть категорію",
     selective=True
 )
 
-special_kb = ReplyKeyboardMarkup(
+weather_category = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="Your location", request_location=True),
-            KeyboardButton(text="Contact", request_contact=True),
-            KeyboardButton(text="Poll",request_poll=KeyboardButtonPollType())
+            KeyboardButton(text="Назва міста")
         ],
         [
-            KeyboardButton(text="Back")
+            KeyboardButton(text="Координати", request_location=True)
+        ],
+        [
+            KeyboardButton(text="Назад")
         ]
     ],
-    resize_keyboard=True,
-    one_time_keyboard=True
+    resize_keyboard=True, #дозволяє зробити кнопки менші, адаптувати до клавіатури 
+    one_time_keyboard=True, #буде приховуватися до наступного викор
+    input_field_placeholder="Оберіть категорію",
+    selective=True
+)
+
+book_category = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Рекомендована книга")
+        ],
+        [
+            KeyboardButton(text="Збережені книги")
+        ],
+        [
+            KeyboardButton(text="Видалити книгу")
+        ],
+        [
+            KeyboardButton(text="Назад")
+        ]
+    ],
+    resize_keyboard=True, #дозволяє зробити кнопки менші, адаптувати до клавіатури 
+    one_time_keyboard=True, #буде приховуватися до наступного викор
+    input_field_placeholder="Оберіть категорію",
+    selective=True
 )
 
 rmk = ReplyKeyboardRemove()

@@ -1,9 +1,9 @@
 from aiogram.fsm.state import StatesGroup, State
 
 
-class Form(StatesGroup):
-    name = State()
-    age = State()
-    sex = State()
-    about = State()
-    photo = State()
+class Weather_by_city(StatesGroup):
+    city = State()
+
+
+class Book(StatesGroup):
+    book = State()

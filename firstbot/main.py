@@ -1,30 +1,28 @@
-from aiogram import Bot, Dispatcher, F
 import asyncio
 
-from handlers import bot_messages, user_commands, questionaire
-
-
-HELP_TEXT = """
-<b>/start</b> - <em>start bot</em>
-<b>/sticker</b> - <em>send stiker</em>
-<b>/help</b> - <em>show all commands</em>
-"""
+from aiogram import Bot, Dispatcher, types
+from config import private, TOKEN_API
+from handlers import bot_messages, user_commands
+from callbacks import callbacks
+import database
 
 
 async def main():
-    TOKEN_API= "6706585845:AAET38gtbHZPNnz8gFeHj4Qc4nMI11MKhsk"
     bot = Bot(token=TOKEN_API, parse_mode="HTML")
     dp = Dispatcher()
 
     dp.include_routers(
         user_commands.router,
-        questionaire.router,
+        callbacks.router,
         bot_messages.router
     )
+    await database.db_connect()
+    # await database.insert_books()
 
     await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot)
+    await bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
+    await dp.start_polling(bot, )
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(main()) 
