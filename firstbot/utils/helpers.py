@@ -14,20 +14,20 @@ async def get_weather_text(data):
             
     if description in icons[0]:
         weather_icons = icons[0][description]
-        text = f'<em>Дата: {datetime.datetime.now().strftime('%d-%m-%Y %H:%M')}</em>\n'
-        text += f'<b>Погода у місті: {city}</b>\n\n'
-        text += f'Температура повітря: {round(temp)}C° {weather_icons}\n'
-        text += f'Вологість: {humidity}%\n'
-        text += f'Швидкість вітру: {round(wind)}м/c'
+        text = f"<em>Дата: {datetime.datetime.now().strftime('%d-%m-%Y %H:%M')}</em>\n"
+        text += f"<b>Погода у місті: {city}</b>\n\n"
+        text += f"Температура повітря: {round(temp)}C° {weather_icons}\n"
+        text += f"Вологість: {humidity}%\n"
+        text += f"Швидкість вітру: {round(wind)}м/c"
                     
         return text
     
     else:
-        text = f'<em>Дата: {datetime.datetime.now().strftime('%d-%m-%Y %H:%M')}</em>\n'
-        text += f'<b>Погода у місті: {city}</b>\n\n'
-        text += f'Температура повітря: {round(temp)}C°\n'
-        text += f'Вологість: {humidity}%\n'
-        text += f'Швидкість вітру: {round(wind)}м/c'
+        text = f"<em>Дата: {datetime.datetime.now().strftime('%d-%m-%Y %H:%M')}</em>\n"
+        text += f"<b>Погода у місті: {city}</b>\n\n"
+        text += f"Температура повітря: {round(temp)}C°\n"
+        text += f"Вологість: {humidity}%\n"
+        text += f"Швидкість вітру: {round(wind)}м/c"
 
         return text
     
@@ -35,7 +35,7 @@ async def get_weather_text(data):
 def translator(city):
     translator = Translator()
     source_lang = translator.detect(city).lang
-    target_lang = 'en'
+    target_lang = "en"
     translated_city = translator.translate(city, src=source_lang, dest=target_lang)
     return translated_city.text
 

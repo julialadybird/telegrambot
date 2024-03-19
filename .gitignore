@@ -6,6 +6,12 @@
 __pycache__
 db.sqlite3
 config.py
+requirements.txt
+helpers.py
+books.json
+movies.json
+serials.json
+subloader.py
 media
 
 # Backup files # 
