@@ -34,3 +34,7 @@ book_more = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="🎬 Рекомендувати ще!", callback_data="recommended")],
         [InlineKeyboardButton(text="Назад", callback_data="back_book")]
         ])
+
+back_kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="Назад", callback_data="back")]
+        ])

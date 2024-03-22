@@ -12,6 +12,8 @@ books.json
 movies.json
 serials.json
 subloader.py
+genres.json
+books.db
 media
 
 # Backup files # 
