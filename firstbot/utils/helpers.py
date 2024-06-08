@@ -1,5 +1,6 @@
 from data.subloader import get_json
 from googletrans import Translator
+from deep_translator import GoogleTranslator as G
 import datetime
 
 
@@ -41,3 +42,6 @@ def translator(city):
 
 
 
+def bot_translator(text):
+    translat_text = G(source='auto', target='en').translate(text)
+    return translat_text

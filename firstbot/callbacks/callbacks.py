@@ -2,7 +2,9 @@ from aiogram import Router, F, Bot
 from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from keyboards import reply, inline
+
+from keyboards import inline
+from utils.helpers import bot_translator
 import random
 import re
 import database
@@ -101,9 +103,9 @@ async def book_recommendation(query: CallbackQuery, bot: Bot):
     books =[book for book in all_books if not book in data]
     
     book = random.choice(books)
-
+    
     info_book = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="Зберегти", callback_data=f"save_book_{book['id']}")],
+        [InlineKeyboardButton(text=f"Зберегти", callback_data=f"save_book_{book['id']}")],
         [InlineKeyboardButton(text="Детальніше", url=book['links'])]
     ])
 
@@ -114,22 +116,24 @@ async def book_recommendation(query: CallbackQuery, bot: Bot):
 
 @router.callback_query(F.data == "films")
 async def recommend_film(query: CallbackQuery, bot: Bot):
-    film_search = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="...за жанром", callback_data=f"genres_{query.data}")],
-        [InlineKeyboardButton(text="...з усіх", callback_data=f"all_films_{query.data}")],
-        [InlineKeyboardButton(text="Назад", callback_data="back")]
-        ])
-    await bot.send_message(chat_id=query.from_user.id, text="Рекомендувати...", reply_markup=film_search)
+    film_search = InlineKeyboardBuilder()
+    film_search.button(text="за жанром", callback_data=f"genres_{query.data}")
+    film_search.button(text="з усіх", callback_data=f"all_films_{query.data}")
+    film_search.button(text="Назад", callback_data="back")
+    film_search.adjust(2,1)
+
+    await bot.send_message(chat_id=query.from_user.id, text="Рекомендувати кіно...", reply_markup=film_search.as_markup())
 
 
 @router.callback_query(F.data == "serials")
 async def serial_recommendation(query: CallbackQuery, bot: Bot):
-    film_search = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="...за жанром", callback_data=f"genres_{query.data}")],
-        [InlineKeyboardButton(text="...з усіх", callback_data=f"all_films_{query.data}")],
-        [InlineKeyboardButton(text="Назад", callback_data="back")]
-        ])
-    await bot.send_message(chat_id=query.from_user.id, text="Рекомендувати...", reply_markup=film_search)
+    film_search = InlineKeyboardBuilder()
+    film_search.button(text="за жанром", callback_data=f"genres_{query.data}")
+    film_search.button(text="з усіх", callback_data=f"all_films_{query.data}")
+    film_search.button(text="Назад", callback_data="back")
+    film_search.adjust(2,1)
+    
+    await bot.send_message(chat_id=query.from_user.id, text="Рекомендувати серіал...", reply_markup=film_search.as_markup())
 
 
 @router.callback_query(F.data.startswith("all_films_"))
@@ -289,7 +293,6 @@ async def about_film(query: CallbackQuery, bot: Bot):
                                 f"<b>Сюжет:</b>\n{film['description']}", reply_markup=inline.serial_more)
 
 
-
 @router.callback_query(F.data == "back_films")
 async def back_films(query: CallbackQuery, bot: Bot):
     await bot.send_message(chat_id=query.from_user.id, text="Категорія Кіно!", reply_markup=inline.film_category)
@@ -300,4 +303,4 @@ async def back_books(query: CallbackQuery, bot: Bot):
 
 @router.callback_query(F.data == "back")
 async def back(query: CallbackQuery, bot: Bot):
-    await bot.send_message(chat_id=query.from_user.id, text="Головне меню!", reply_markup=reply.main_kb)
+    await bot.send_message(chat_id=query.from_user.id, text="Головне меню!", reply_markup=inline.start_category)

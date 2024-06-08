@@ -3,11 +3,12 @@ import asyncio
 import logging
 import sys
 from aiogram import Bot, Dispatcher, types
-#from aiogram.client.session.aiohttp import AiohttpSession
+# from aiogram.client.session.aiohttp import AiohttpSession
 from config import private, TOKEN_API
 from handlers import bot_messages, user_commands
 from callbacks import callbacks
-import database
+# import database
+import dbpostgres
 
 logging.basicConfig(level=logging.INFO)
 
@@ -22,7 +23,10 @@ async def main():
         bot_messages.router
     )
  
-    await database.db_connect()
+    # await database.db_connect()
+    await dbpostgres.db_connect()
+    # await dbpostgres.insert_movies()
+    # await dbpostgres.insert_books()
     # await database.insert_movies()
     # await database.insert_books()
    

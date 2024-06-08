@@ -1,7 +1,7 @@
 from aiogram import Router, F, Bot
 from aiogram.filters import CommandStart
 from aiogram.types import Message
-from keyboards import reply, inline
+from keyboards import inline
 from main import *
 
 router = Router()
